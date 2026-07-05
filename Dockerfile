@@ -7,4 +7,6 @@ RUN pacman -Syu --noconfirm \
 RUN npm install -g @getpaseo/cli opencode-ai \
     && npm cache clean --force
 
+RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+
 WORKDIR /workspace
