@@ -9,4 +9,7 @@ RUN npm install -g @getpaseo/cli opencode-ai \
 
 RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 
+COPY ./entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
 WORKDIR /workspace
