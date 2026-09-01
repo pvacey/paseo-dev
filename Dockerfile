@@ -5,9 +5,8 @@ RUN pacman -Syu --noconfirm \
     && pacman -Scc --noconfirm
 
 RUN npm install -g @getpaseo/cli opencode-ai \
+    && cd $(npm root -g)/opencode-ai && node postinstall.mjs \
     && npm cache clean --force
-
-RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 
 COPY ./entrypoint.sh .
 RUN chmod +x entrypoint.sh
