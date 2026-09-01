@@ -10,3 +10,4 @@ Built on `archlinux:latest`.
 docker build -t paseo-dev .
 docker run -it --rm -v $(pwd):/workspace paseo-dev
 ```
+
