@@ -1,14 +1,21 @@
-FROM archlinux:latest
+FROM ghcr.io/getpaseo/paseo:latest
 
-RUN pacman -Syu --noconfirm \
-    git github-cli jq fzf make gcc diffutils openssh lsof net-tools unzip nodejs npm bun python uv go \
-    && pacman -Scc --noconfirm
+USER root
+RUN npm install -g opencode-ai
 
-RUN npm install -g @getpaseo/cli opencode-ai \
-    && cd $(npm root -g)/opencode-ai && node postinstall.mjs \
-    && npm cache clean --force
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      github-cli \
+      curl \
+      fzf \
+      make \
+      gcc \
+      bun \
+      python \
+      uv \
+      go \
+      jq \
+    rm -rf /var/lib/apt/lists/*
 
-COPY ./entrypoint.sh .
-RUN chmod +x entrypoint.sh
-
-WORKDIR /workspace
+RUN bun install -g @oh-my-pi/pi-coding-agent
